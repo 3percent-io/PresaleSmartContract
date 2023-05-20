@@ -253,3 +253,30 @@ instance.pausePresale(latestPresaleId)
 instance.unPausePresale(latestPresaleId)
 ```
 
+# How to deploy
+1. Clone this repository
+2. Create .env file from .env.template and filled-in your env variable
+3. Install dependency, Run `npm install`
+4. Compile smart contracts, Run `truffle compile`
+5. [Optional] Deploy TestUSDT contract
+    ``` bash
+    # Deploy TestUSDT smart contract
+    truffle migrate --f 1 --to 1 --network sepolia
+    # Verify TestUSDT smart contract
+    truffle run verify TestUSDT --network sepolia
+    ```
+    Then Change TestUSDT contract address in [2_token_pre_sale.js](migrations/2_token_pre_sale.js)
+6. Deploy Presale smart contract
+    ``` bash
+    # Deploy Presale smart contract
+    truffle migrate --f 2 --to 2 --network sepolia
+    # Verify Presale smart contract
+    truffle run verify TokenPreSale --network sepolia
+    ```
+7. [Optional] Deploy TestErc20Token smart contract
+    ``` bash
+    # Deploy Presale smart contract
+    truffle migrate --f 3 --to 3 --network sepolia
+    # Verify Presale smart contract
+    truffle run verify TestErc20Token --network sepolia
+    ```

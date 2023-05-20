@@ -18,7 +18,7 @@
  *
  */
 
- require('dotenv').config();
+require('dotenv').config();
 
 const HDWalletProvider = require('@truffle/hdwallet-provider');
 const fs = require('fs');
@@ -27,7 +27,9 @@ module.exports = {
   plugins: [
     'truffle-plugin-verify'
   ],
-
+  api_keys: {
+    etherscan: process.env.ETHERSCAN_API_KEY
+  },
   networks: {
     development: {
       host: "127.0.0.1",     // Localhost (default: none)
@@ -53,6 +55,10 @@ module.exports = {
       network_id: '5',
       networkCheckTimeout: 10000,
       timeoutBlocks: 200
+    },
+    sepolia: {
+      provider: () => new HDWalletProvider(process.env.WALLET_PRIVATE_KEY, 'https://sepolia.infura.io/v3/' + process.env.INFURA_API_KEY),
+      network_id: '11155111'
     }
   },
 

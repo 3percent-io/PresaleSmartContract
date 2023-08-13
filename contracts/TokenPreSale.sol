@@ -366,6 +366,49 @@ contract TokenPreSale is Initializable, ReentrancyGuardUpgradeable, OwnableUpgra
     }
 
     /**
+     * @dev To add team member vesting (similiar to buyPresaleWith 0 USDT)
+     * @param _id Preasale id
+     * @param amount No of tokens to get
+     */
+    function addVestingMember(uint256 _id, uint256 amount, address _address)
+        external
+        onlyOwner
+        checkPresaleId(_id)
+        checkSaleState(_id, amount)
+        returns (bool)
+    {
+        require(!paused[_id], "Presale paused");
+        require(_address != address(0), "Zero token address");
+        presale[_id].inSale -= amount;
+
+        Presale memory _presale = presale[_id];
+
+        if (userVesting[_address][_id].totalAmount > 0) {
+            userVesting[_address][_id].totalAmount += (amount *
+                _presale.baseDecimals);
+        } else {
+            userVesting[_address][_id] = Vesting(
+                (amount * _presale.baseDecimals),
+                0,
+                _presale.vestingStartTime + _presale.vestingCliff,
+                _presale.vestingStartTime +
+                    _presale.vestingCliff +
+                    _presale.vestingPeriod
+            );
+        }
+
+        emit TokensBought(
+            _address,
+            _id,
+            address(0),
+            amount,
+            0,
+            block.timestamp
+        );
+        return true;
+    }
+
+    /**
      * @dev To buy into a presale using USDT
      * @param _id Presale id
      * @param amount No of tokens to buy

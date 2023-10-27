@@ -3,10 +3,10 @@ pragma solidity ^0.8.17;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
-contract TestErc20Token is IERC20 {
+contract THREE_PERCENT is IERC20 {
 
-    string public constant name = "TestErc20Token";
-    string public constant symbol = "TKN";
+    string public constant name = "3percent";
+    string public constant symbol = "3PCT";
     uint8 public constant decimals = 18;
 
 

@@ -59,6 +59,14 @@ module.exports = {
     sepolia: {
       provider: () => new HDWalletProvider(process.env.WALLET_PRIVATE_KEY, 'https://sepolia.infura.io/v3/' + process.env.INFURA_API_KEY),
       network_id: '11155111'
+    },
+    erc20: {
+      provider: () => new HDWalletProvider(process.env.WALLET_PRIVATE_KEY, 'https://mainnet.infura.io/v3/' + process.env.INFURA_API_KEY),
+      network_id: '1',
+      gas: 1000000,
+      gasPrice: 33000000000,
+      networkCheckTimeout: 10000,
+      timeoutBlocks: 200
     }
   },
 

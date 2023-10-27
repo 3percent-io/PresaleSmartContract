@@ -100,7 +100,7 @@ contract TokenPreSale is Initializable, ReentrancyGuardUpgradeable, OwnableUpgra
         aggregatorInterface = AggregatorV3Interface(_oracle);
         USDTInterface = IERC20Upgradeable(_usdt);
         BASE_MULTIPLIER = (10**18);
-        MONTH = (30 * 24 * 3600);
+        MONTH = 1;
     }
 
     /**
